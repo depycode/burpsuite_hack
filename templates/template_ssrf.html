@@ -1,0 +1,24 @@
+{% extends "base_ssrf.html" %}
+{% block table_body %}
+{% for item in items %}
+<tbody>
+<tr>
+    <td><code>{{ item[0] }}</code></td>
+    <td><code>{{ item[1] }}</code></td>
+    <td><code>{{ item[2] }}</code></td>
+    <td>
+        <details>
+            <summary><u>请求包</u></summary>
+            <pre>{{ item[3] | e | replace('\r\n','<br>') }}</pre>
+        </details>
+    </td>
+    <td>
+        <details>
+            <summary><u>响应包</u></summary>
+            <pre>{{ item[4] | e | replace('\r\n','<br>') }}</pre>
+        </details>
+    </td>
+</tr>
+</tbody>
+{% endfor %}
+{% endblock %}
