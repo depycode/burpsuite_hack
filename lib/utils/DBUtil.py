@@ -88,7 +88,7 @@ class DBUtil(object):
 
 # if __name__ == '__main__':
 #     db = DBUtil()
-#     # x = db.get_one("select create_time, host, payload, request_data, response from ssrf WHERE payload='1cdc43559a111.ssrf.mabwcy.xforlog.cn'")
+#     # x = db.get_one("select create_time, host, payload, request_data, response from ssrf WHERE payload='dnslog.cn'")
 #     # print(x)
 #     items = db.get_all(
 #         "select create_time, host, payload, request_data, response from ssrf where to_days(create_time)=to_days(now()) and is_vul=1")
