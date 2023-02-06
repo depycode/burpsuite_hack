@@ -341,12 +341,6 @@ class HttpWappalyzer(object):
             pass
         return self.generateRequest(request_data_copy), self.generateResponse(self.processRequest(request_data_copy))
 
-# if __name__ == '__main__':
-#     d = json.loads('{"headers": {"User-Agent": "Fiddler/5.0.20202.18177 (.NET 4.8; WinNT 10.0.17763.0; zh-CN; 8xAMD64; Emergency Check; Full Instance; Extensions: APITesting, AutoSaveExt, EventLog, FiddlerOrchestraAddon, HostsFile, RulesTab2, SAZClipboardFactory, SimpleFilter, Timeline)", "Referer": "http://fiddler2.com/client/TELE/5.0.20202.18177", "Connection": "close", "Host": "www.fiddler2.com", "Accept-Encoding": "gzip, deflate", "Accept-Language": "zh-CN"}, "method": "GET", "full_url": "https://www.fiddler2.com:443/UpdateCheck.aspx?isBeta=False", "param_in_body": {}, "body": "{}", "protocol": "https", "content_type": 0, "port": 443, "host": "www.fiddler2.com", "param_in_url": {"isBeta": "http://bc3f804abb.ssrf.mabwcy.xforlog.cn"}}')
-#     h = HttpWappalyzer()
-#     print(h.generateRequest(d))
-
-
 
 # if __name__ == '__main__':
 #     http = HttpWappalyzer()
