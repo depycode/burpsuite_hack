@@ -3,9 +3,16 @@
 
 详细请见：https://www.cnblogs.com/depycode/p/17079397.html
 # 整体架构
-
+![image](https://github.com/depycode/burpsuite_hack/blob/master/p2.png)
 
 # 使用方法
+- burpsuite 插件加载：BurpExtender_ALL.py
+![image](https://github.com/depycode/burpsuite_hack/blob/master/p1.jpg)
+
+- 扫描端启动
+```
+nohup python3 MyUDPHandler_Threads.py &
+```
 
 # 创建数据库
 
