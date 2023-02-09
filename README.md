@@ -1,11 +1,11 @@
 # burpsuite_hack
 一款代理扫描器
 
-适配python3.6+ 
+- 适配python3.6+ 
 
-支持 GET/POST/无限嵌套json的漏洞探测
+- 支持 GET/POST/无限嵌套json、list的漏洞探测
 
-扫描请求去重
+- 扫描请求去重
 
 详细请见：https://www.cnblogs.com/depycode/p/17079397.html
 # 整体架构
