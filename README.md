@@ -5,6 +5,8 @@
 
 支持 GET/POST/无限嵌套json的漏洞探测
 
+扫描请求去重
+
 详细请见：https://www.cnblogs.com/depycode/p/17079397.html
 # 整体架构
 ![image](https://github.com/depycode/burpsuite_hack/blob/master/p2.png)
