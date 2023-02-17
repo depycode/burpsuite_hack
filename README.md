@@ -7,6 +7,8 @@
 
 - 扫描请求去重
 
+- 基本不会触发WAF，最小化探测
+
 详细请见：https://www.cnblogs.com/depycode/p/17079397.html
 # 整体架构
 ![image](https://github.com/depycode/burpsuite_hack/blob/master/p2.png)
