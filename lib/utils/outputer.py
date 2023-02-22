@@ -7,6 +7,8 @@ def generate_html(items, template_name, vulType):
     # template = env.get_template('template_ssrf.html')
     template = env.get_template(template_name)
     report_dir = os.path.join(os.path.dirname(__file__),'../../reports/')
+    if not os.path.exists(report_dir):
+        os.mkdir(report_dir)
     t = time.strftime("%Y-%m-%d")
     # report_filename = report_dir + 'SSRF-'+ t + '.html'
     report_filename = report_dir + vulType + '-'+ t + '.html'
