@@ -91,4 +91,7 @@ class BurpExtender(IBurpExtender, IHttpListener):
             s.sendall(str(send_data).encode('utf-8'))
         except Exception as e:
             self.stdout.println(e)
+        finally:
+            # close 
+            s.close()
 
