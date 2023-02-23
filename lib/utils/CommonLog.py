@@ -20,7 +20,7 @@ class CommonLog(object):
         self.logger = logging.getLogger(logger)
         self.logger.setLevel(logging.DEBUG)
         self.log_time = time.strftime("%Y_%m_%d")
-        file_dir = os.getcwd() + '/../../logs'
+        file_dir = os.path.join(os.path.dirname(__file__), '../../logs')
         if not os.path.exists(file_dir):
             os.mkdir(file_dir)
         self.log_name = os.path.join(os.path.dirname(__file__), '../../logs', self.log_time + '.log')
