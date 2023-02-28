@@ -1,3 +1,4 @@
+#coding=utf-8
 from burp import IBurpExtender
 from burp import IContextMenuFactory
 from java.io import PrintWriter
