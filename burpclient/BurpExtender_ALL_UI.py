@@ -168,7 +168,7 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
     def setConfig(self, button):
         self.scan_host = tuple(self._scan_host.getText().strip().split('|')) if self._scan_host.getText().strip() else ()
         self.static_suffix = tuple(self._static_suffix.getText().strip().split('|')) if self._static_suffix.getText().strip() else ()
-        self.black_host = self._black_host.getText().strip().split('|') if self._static_suffix.getText().strip() else []
+        self.black_host = self._black_host.getText().strip().split('|') if self._black_host.getText().strip() else []
         self.udp_server_host = self._udp_server_host.getText().strip()
         self.udp_server_port = int(self._udp_server_port.getText())
 
