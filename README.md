@@ -14,7 +14,7 @@
 ![image](https://github.com/depycode/burpsuite_hack/blob/master/p2.png)
 
 # 使用方法
-- burpsuite 插件加载：BurpExtender_ALL.py ，加载前将BurpExtender_ALL.py 里的sock连接端口设置成扫描端的接收数据端口
+- burpsuite 插件加载：BurpExtender_ALL_UI.py ，修改socks host、port 为扫描端对应的ip和端口，然后点击set
 ![image](https://github.com/depycode/burpsuite_hack/blob/master/p1.jpg)
 
 - 扫描端启动
