@@ -31,20 +31,25 @@ class SQLBool(object):
         #20220809 优化int类型注入误报，将-0 改为 -0-0
         self.bool_int_tuple = ('-ab', '-0-0-0', '-false')
         #20221024 将1-x 变为 (1-x)
-        self.bool_order_tuple = (",(1-xaxfe)", ",(1)",",true")
+        self.bool_order_tuple = (",xaxfe", ",1",",true")
         #20221218 双引号
         self.bool_double_quotes_tuple = ('"','""','" "')
         self.bool_double_quotes_tuple_second = ('"||x||"', '"||"')
 
         self.replace_status = Config.get_instance().get("app.REPLACE_STATUS")
         self.replace_regex = re.compile(Config.get_instance().get("REPLACE.REGEX"))
+        self.remove_payload = self.bool_str_tuple + self.bool_str_tuple_second + self.bool_str_tuple_third + self.bool_int_tuple + self.bool_order_tuple + self.bool_double_quotes_tuple + self.bool_double_quotes_tuple_second
 
         ### 带有随机值干扰
-        self.bool_rdm = [('\'','\' \'',"'||'"),('-x','-0-0-0','-false'),(',(1-xaxfe)',',(1)',',true')]
+        self.bool_rdm = [('\'','\' \'',"'||'"),('-x','-0-0-0','-false'),(',xaxfe',',1',',true')]
 
-
+      
     def removeRandomContent(self, page):
-        return re.sub(self.replace_regex, '',page)
+        remove_content = re.sub(self.replace_regex, '',page)
+        # 替换返回包中的payload为空，降低干扰
+        for p in self.remove_payload:
+            remove_content = remove_content.replace(p,'')
+        return remove_content
 
     def get_score(self, raw1, raw2):
         """
@@ -106,7 +111,14 @@ class SQLBool(object):
 
     def no_header_list(self,resp_list):
         return list(map(self.no_header,resp_list))
-
+    
+    #降低部分误报
+    def func_equal(self,*args):
+        # 所有值都相等返回False
+        if len(set(args))==1:
+            return False
+        # 否则返回True
+        return True
 
     @get_time
     def scan(self, request_data):
@@ -170,8 +182,9 @@ class SQLBool(object):
             true_score_1 = self.get_score(self.no_header(true_response_1), resp_raw_first_no_header)
             true_score_1_2 = self.get_score(self.no_header(true_response),self.no_header(true_response_1)) # 比较'' 和 ' '
             false_score_1_2 = self.get_score(self.no_header(true_response),self.no_header(false_response)) # 比较' 和 ''
+            verify_equal = self.func_equal(self.no_header(true_response),self.no_header(true_response_1),self.no_header(false_response))
             # 进行第一步判断 ', ''
-            if (false_score <= self.similar and true_score > self.similar) or (false_score <= self.similar and true_score_1 > self.similar) or (false_score <= self.similar and true_score_1_2 >self.similar and false_score_1_2<=self.similar):
+            if (false_score <= self.similar and true_score > self.similar) or (false_score <= self.similar and true_score_1 > self.similar) or (false_score <= self.similar and true_score_1_2 >self.similar and false_score_1_2<=self.similar and verify_equal):
                 self.reportFlag = True
                 strFlag = True
                 # 进行第二次判断确认
@@ -310,10 +323,11 @@ class SQLBool(object):
                                                 self.no_header(true_response_double_quotes_1))  # 比较"" 和 " "
                 false_score_double_quotes_1_2 = self.get_score(self.no_header(true_response_double_quotes),
                                                  self.no_header(false_response_double_quotes))  # 比较" 和 ""
-
+                
+                verify_double_equal = self.func_equal(self.no_header(true_response_double_quotes),self.no_header(true_response_double_quotes_1),self.no_header(false_response_double_quotes))
                 if (false_score_double_quotes <= self.similar and true_score_double_quotes > self.similar) or (
                         false_score_double_quotes <= self.similar and true_score_double_quotes_1 > self.similar) or (
-                        false_score_double_quotes <= self.similar and true_score_double_quotes_1_2 > self.similar and false_score_double_quotes_1_2 <= self.similar):
+                        false_score_double_quotes <= self.similar and true_score_double_quotes_1_2 > self.similar and false_score_double_quotes_1_2 <= self.similar and verify_double_equal):
                     self.reportFlag = True
                     strdouble_quotesFlag = True
                     # 进行第二次判断确认
