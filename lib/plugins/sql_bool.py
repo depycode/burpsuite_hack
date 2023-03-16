@@ -31,7 +31,7 @@ class SQLBool(object):
         #20220809 优化int类型注入误报，将-0 改为 -0-0
         self.bool_int_tuple = ('-ab', '-0-0-0', '-false')
         #20221024 将1-x 变为 (1-x)
-        self.bool_order_tuple = (",xaxfe", ",1",",true")
+        self.bool_order_tuple = (",(1-xaxfe)", ",(1)",",true")
         #20221218 双引号
         self.bool_double_quotes_tuple = ('"','""','" "')
         self.bool_double_quotes_tuple_second = ('"||x||"', '"||"')
@@ -41,7 +41,7 @@ class SQLBool(object):
         self.remove_payload = self.bool_str_tuple + self.bool_str_tuple_second + self.bool_str_tuple_third + self.bool_int_tuple + self.bool_order_tuple + self.bool_double_quotes_tuple + self.bool_double_quotes_tuple_second
 
         ### 带有随机值干扰
-        self.bool_rdm = [('\'','\' \'',"'||'"),('-x','-0-0-0','-false'),(',xaxfe',',1',',true')]
+        self.bool_rdm = [('\'','\' \'',"'||'"),('-ab','-0-0-0','-false'),(',(1-xaxfe)',',(1)',',true')]
 
       
     def removeRandomContent(self, page):
