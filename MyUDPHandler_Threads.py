@@ -1,3 +1,4 @@
+#coding=utf-8
 import socketserver
 import json
 from lib.utils.HttpWappalyzer import HttpWappalyzer
