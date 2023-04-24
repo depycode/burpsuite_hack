@@ -5,6 +5,7 @@ from lib.utils.HttpWappalyzer import HttpWappalyzer
 from conf.ConfigFileModifyHandler import *
 import copy
 import queue
+import ast
 from socketserver import UDPServer
 from socketserver import ThreadingMixIn
 from socketserver import BaseRequestHandler
@@ -44,7 +45,7 @@ class MyUDPHandler(socketserver.BaseRequestHandler):
     def handle(self):  # 必须要有handle方法；所有处理必须通过handle方法实现
         # self.request is the TCP socket connected to the client
         self.data = self.request[0].strip()
-        data_dict = eval(self.data.decode('utf-8'))
+        data_dict = ast.literal_eval(self.data.decode('utf-8'))
         data_dict['param_in_url'] = self.parse(data_dict['param_in_url'])
         data_dict['param_in_body'] = self.parse(data_dict['param_in_body'])
         self.queue.put(data_dict)
