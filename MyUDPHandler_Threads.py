@@ -11,7 +11,8 @@ from lib.plugins.ssrf import SSRF
 from lib.plugins.rce import RCE
 from lib.plugins.sql_error import SQLError
 from lib.plugins.sql_bool import SQLBool
-from lib.utils.CosineSimilarity import CosineSimilarity
+from lib.utils.diffpage_score import Diffpage_score
+#from lib.utils.CosineSimilarity import CosineSimilarity
 from conf.ConfigFileModifyHandler import Config
 import hashlib
 import threading
@@ -150,7 +151,8 @@ if __name__ == "__main__":
     logger = CommonLog(__name__).getlog()
     HOST, PORT = "0.0.0.0", 32743
     queue = queue.Queue()
-    model = CosineSimilarity()
+    #model = CosineSimilarity()
+    model = Diffpage_score()
     server = MyUDPServer((HOST, PORT), MyUDPHandler, queue=queue)  # 实例化一个多线程UDPServer
     server.max_packet_size = 8192 * 20
     # Start the server
