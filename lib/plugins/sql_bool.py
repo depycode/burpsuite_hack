@@ -61,7 +61,7 @@ class SQLBool(object):
         # e1 = self.model.encode(raw_1)
         # e2 = self.model.encode(raw_2)
         # return float(cos_sim(e1, e2))
-        return self.model.get_score(raw1,raw2)
+        return self.model.get_score(repr(raw1),repr(raw2))
 
     def no_header(self, raw):
         """
